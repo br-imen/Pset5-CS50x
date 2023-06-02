@@ -32,9 +32,9 @@ TIME IN TOTAL:
 
     - The challenge ahead of you is to implement the fastest spell checker you can! By “fastest,” though, we’re talking actual “wall-clock,” not asymptotic, time.
 
-    - *In speller.c*, we’ve put together a program that’s designed to spell-check a file after loading a dictionary of words from disk into memory. That dictionary, meanwhile, is implemented in a file called dictionary.c. (It could just be implemented in speller.c, but as programs get more complex, it’s often convenient to break them into multiple files.) The prototypes for the functions therein, meanwhile, are defined not in dictionary.c itself but in dictionary.h instead. That way, both speller.c and dictionary.c can #include the file. Unfortunately, we didn’t quite get around to implementing the loading part. Or the checking part. Both (and a bit more) we leave to you! But first, a tour.
+    -*In speller.c*, we’ve put together a program that’s designed to spell-check a file after loading a dictionary of words from disk into memory. That dictionary, meanwhile, is implemented in a file called dictionary.c. (It could just be implemented in speller.c, but as programs get more complex, it’s often convenient to break them into multiple files.) The prototypes for the functions therein, meanwhile, are defined not in dictionary.c itself but in dictionary.h instead. That way, both speller.c and dictionary.c can #include the file. Unfortunately, we didn’t quite get around to implementing the loading part. Or the checking part. Both (and a bit more) we leave to you! But first, a tour.
 
-    - *dictionary.h* 
+    -*dictionary.h* 
         - Open up dictionary.h, and you’ll see some new syntax, including a few lines that mention DICTIONARY_H. No need to worry about those, but, if curious, those lines just ensure that, even though dictionary.c and speller.c (which you’ll see in a moment) #include this file, clang will only compile it once.
 
         - Next notice how we #include a file called stdbool.h. That’s the file in which bool itself is defined. You’ve not needed it before, since the CS50 Library used to #include that for you.
@@ -66,7 +66,7 @@ TIME IN TOTAL:
         - Now open up dictionary.c. Notice how, atop the file, we’ve defined a struct called node that represents a node in a hash table. And we’ve declared a global pointer array, table, which will (soon) represent the hash table you will use to keep track of words in the dictionary. The array contains N node pointers, and we’ve set N equal to 26 for now, to match with the default hash function as described below. You will likely want to increase this depending on your own implementation of hash.
         - Next, notice that we’ve implemented load, check, size, and unload, but only barely, just enough for the code to compile. Notice too that we’ve implemented hash with a sample algorithm based on the first letter of the word. Your job, ultimately, is to re-implement those functions as cleverly as possible so that this spell checker works as advertised. And fast!
 
-    - *speller.c*:
+    -*speller.c*:
         - Okay, next open up speller.c and spend some time looking over the code and comments therein. You won’t need to change anything in this file, and you don’t need to understand its entirety, but do try to get a sense of its functionality nonetheless. Notice how, by way of a function called getrusage, we’ll be “benchmarking” (i.e., timing the execution of) your implementations of check, load, size, and unload. Also notice how we go about passing check, word by word, the contents of some file to be spell-checked. Ultimately, we report each misspelling in that file along with a bunch of statistics.
 
         - Notice, incidentally, that we have defined the usage of speller to be
@@ -104,7 +104,7 @@ TIME IN TOTAL:
 
         - Odds are, you didn’t spend enough time looking over speller.c. Go back one square and walk yourself through it again!
 
-    - *texts/*
+    -*texts/*
        -  So that you can test your implementation of speller, we’ve also provided you with a whole bunch of texts, among them the script from La La Land, the text of the Affordable Care Act, three million bytes from Tolstoy, some excerpts from The Federalist Papers and Shakespeare, and more. So that you know what to expect, open and skim each of those files, all of which are in a directory called texts within your pset5 directory.
 
         - Now, as you should know from having read over speller.c carefully, the output of speller, if executed with, say,
@@ -146,7 +146,7 @@ TIME IN TOTAL:
         - Incidentally, to be clear, by “misspelled” we simply mean that some word is not in the dictionary provided.
 
 
-    - *Makefile*
+    -*Makefile*
         - And, lastly, recall that make automates compilation of your code so that you don’t have to execute clang manually along with a whole bunch of switches. However, as your programs grow in size, make won’t be able to infer from context anymore how to compile your code; you’ll need to start telling make how to compile your program, particularly when they involve multiple source (i.e., .c) files, as in the case of this problem. And so we’ll utilize a Makefile, a configuration file that tells make exactly what to do. Open up Makefile, and you should see four lines:
 
         - The first line tells make to execute the subsequent lines whenever you yourself execute make speller (or just make).
@@ -156,7 +156,7 @@ TIME IN TOTAL:
         - Be sure to compile speller by executing make speller (or just make). Executing make dictionary won’t work!
 
 
-*** Specification for me to complete implementation *** 
+***Specification for me to complete implementation*** 
 - Alright, the challenge now before you is to implement, in order, load, hash, size, check, and unload as efficiently as possible using a hash table in such a way that TIME IN load, TIME IN check, TIME IN size, and TIME IN unload are all minimized. To be sure, it’s not obvious what it even means to be minimized, inasmuch as these benchmarks will certainly vary as you feed speller different values for dictionary and for text. But therein lies the challenge, if not the fun, of this problem. This problem is your chance to design. Although we invite you to minimize space, your ultimate enemy is time. But before you dive in, some specifications from us.
 
 - You may not alter speller.c or Makefile.
