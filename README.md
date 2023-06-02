@@ -42,25 +42,7 @@ TIME IN TOTAL:
 
         - Also notice our use of #define, a “preprocessor directive” that defines a “constant” called LENGTH that has a value of 45. It’s a constant in the sense that you can’t (accidentally) change it in your own code. In fact, clang will replace any mentions of LENGTH in your own code with, literally, 45. In other words, it’s not a variable, just a find-and-replace trick.
 
-        - Finally, notice the prototypes for five functions: check, hash, load, size, and unload. Notice how three of those take a pointer as an argument, per the *:
-    ```
-        bool check(const char *word);
-        unsigned int hash(const char *word);
-        bool load(const char *dictionary); 
-    ```
-    
-    
-    - Recall that char * is what we used to call string. So those three prototypes are essentially just:
-
-
-    ```
-    bool check(const string word);
-    unsigned int hash(const string word);
-    bool load(const string dictionary);
-    ```
-    
-    
-    - And const, meanwhile, just says that those strings, when passed in as arguments, must remain constant; you won’t be able to change them, accidentally or otherwise!
+    - const, meanwhile, just says that those strings, when passed in as arguments, must remain constant; you won’t be able to change them, accidentally or otherwise!
 
     -*dictionary.c*:
         - Now open up dictionary.c. Notice how, atop the file, we’ve defined a struct called node that represents a node in a hash table. And we’ve declared a global pointer array, table, which will (soon) represent the hash table you will use to keep track of words in the dictionary. The array contains N node pointers, and we’ve set N equal to 26 for now, to match with the default hash function as described below. You will likely want to increase this depending on your own implementation of hash.
